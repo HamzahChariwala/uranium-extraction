@@ -45,6 +45,7 @@ def uranium_cost(q, multiplier):
 
 
 agents = [
+    Agent('Government', uranium_cost, [1], committed_quantity=52.214),
     Agent('Cameco', uranium_cost, [1]),
     Agent('CGN', uranium_cost, [1.154]),
     Agent('Kazatomprom', uranium_cost, [0.841]),
@@ -77,6 +78,8 @@ plotter = OligopolyPlotter(game)
 # extra.plot_best_response_stream(agents[0], agents[1], inverse_demand_partial, q_range=(0, 50), resolution=150)
 
 
-commitment_values = np.linspace(10, 100, 10)  # Set leader's commitment range
-extra.plot_leader_commitment_vs_follower_profits(agents, inverse_demand_partial, commitment_values)
+# commitment_values = np.linspace(10, 100, 10)  
+# extra.plot_leader_commitment_vs_follower_profits(agents, inverse_demand_partial, commitment_values)
 
+previous_profits = {'Cameco': 90.4, 'CGN': 84.7, 'Kazatomprom': 97.8, 'BHP Billiton': 89.6, 'Orano': 87.8}
+extra.plot_profit_difference_bar_chart(report, previous_profits)

@@ -257,3 +257,24 @@ def plot_leader_commitment_vs_follower_profits(agents, inverse_demand_function, 
     plt.grid(True)
     plt.title("Follower Profits vs Leader's Commitment")
     plt.show()
+
+
+def plot_profit_difference_bar_chart(report, previous_profits=None):
+    agent_names = [agent for agent in report['Individual Profits'].keys() if agent != "Government"]
+    profits = [report['Individual Profits'][agent] for agent in agent_names]
+    
+    if previous_profits:
+        profit_differences = [report['Individual Profits'][agent] - previous_profits.get(agent, 0) for agent in agent_names]
+    else:
+        profit_differences = profits 
+    
+    plt.figure(figsize=(8, 6))
+    color_map = cm.magma(np.linspace(0.1, 0.9, len(agent_names)))  
+    plt.bar(agent_names, profit_differences, color=color_map)
+    
+    plt.xlabel("Agents")
+    plt.ylabel("Profit Difference")
+    plt.title("Change in Profits of Agents")
+    plt.xticks(rotation=20, ha='right')
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+    plt.show()
